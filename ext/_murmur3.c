@@ -68,12 +68,69 @@ static PyMethodDef module_methods[] = {
     {NULL, NULL, 0, NULL}
 };
 
+struct module_state {
+    PyObject *error;
+};
+
+#if PY_MAJOR_VERSION >= 3
+#define GETSTATE(m) ((struct module_state*)PyModule_GetState(m))
+#else
+#define GETSTATE(m) (&_state)
+static struct module_state _state;
+#endif
+
+#if PY_MAJOR_VERSION >= 3
+static int module_traverse(PyObject *m, visitproc visit, void *arg) {
+    Py_VISIT(GETSTATE(m)->error);
+    return 0;
+}
+
+static int module_clear(PyObject *m) {
+    Py_CLEAR(GETSTATE(m)->error);
+    return 0;
+}
+
+static struct PyModuleDef moduledef = {
+        PyModuleDef_HEAD_INIT,
+        "_murmur3",
+        NULL,
+        sizeof(struct module_state),
+        module_methods,
+        NULL,
+        module_traverse,
+        module_clear,
+        NULL
+};
+
+#define INITERROR return NULL
+#else
+#define INITERROR return
+#endif
+
+#if PY_MAJOR_VERSION >= 3
+PyObject * PyInit__murmur3(void)
+{
+    PyObject *m = PyModule_Create(&moduledef);
+#else
 PyMODINIT_FUNC init_murmur3(void)
 {
     PyObject *m = Py_InitModule3("_murmur3", module_methods, module_docstring);
+#endif
+
     if (m == NULL){
-        return;
+        INITERROR;
     }
+    struct module_state *st = GETSTATE(m);
+
+    st->error = PyErr_NewException("_murmur3.Error", NULL, NULL);
+    if (st->error == NULL) {
+        Py_DECREF(m);
+        INITERROR;
+    }
+
+#if PY_MAJOR_VERSION >= 3
+    return m;
+#endif
 }
 
 static PyObject *clandestine_murmur3_32(PyObject *self, PyObject *args)

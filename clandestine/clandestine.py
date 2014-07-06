@@ -27,7 +27,7 @@ class RendezvousHash(object):
 
 class Cluster(object):
 
-    def __init__(self, cluster_config=None, hash_function=murmur3_32, replicas=2):
+    def __init__(self, cluster_config=None, replicas=2, hash_function=murmur3_32):
         self.hash_function = hash_function
 
         def RendezvousHashConstructor():

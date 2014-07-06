@@ -1,3 +1,6 @@
+## MurmurHash3 was written by Austin Appleby, and is placed in the public
+## domain. The author hereby disclaims copyright to this source code.
+
 def murmur3_x86_32(data, seed = 0):
     c1 = 0xcc9e2d51
     c2 = 0x1b873593

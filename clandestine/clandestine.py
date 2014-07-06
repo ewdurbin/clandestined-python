@@ -1,7 +1,7 @@
 
 from collections import defaultdict
 
-from murmur3 import murmur3_x86_32
+from .murmur3 import murmur3_x86_32
 
 
 class RendezvousHash(object):

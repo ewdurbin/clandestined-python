@@ -2,7 +2,7 @@
 import unittest
 
 from clandestine import RendezvousHash
-from murmur3 import murmur3_x86_32
+from clandestine.murmur3 import murmur3_x86_32
 
 
 class RendezvousHashTestCase(unittest.TestCase):

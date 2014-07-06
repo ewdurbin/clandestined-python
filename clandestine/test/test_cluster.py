@@ -3,7 +3,7 @@
 import unittest
 
 from clandestine import Cluster
-from murmur3 import murmur3_x86_32
+from clandestine.murmur3 import murmur3_x86_32
 
 
 class ClusterTestCase(unittest.TestCase):

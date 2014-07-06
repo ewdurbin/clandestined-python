@@ -1,0 +1,5 @@
+/.tox
+/MANIFEST
+
+*.pyc
+*.swp

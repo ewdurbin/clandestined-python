@@ -27,7 +27,7 @@ class RendezvousHash(object):
 
 class Cluster(object):
 
-    def __init__(self, cluster=None, hash_function=murmur3_32, replicas=2):
+    def __init__(self, cluster_config=None, hash_function=murmur3_32, replicas=2):
         self.hash_function = hash_function
 
         def RendezvousHashConstructor():
@@ -39,8 +39,8 @@ class Cluster(object):
         self.zone_members = defaultdict(list)
         self.rings = defaultdict(RendezvousHashConstructor)
 
-        if cluster is not None:
-            for node, node_data in cluster.items():
+        if cluster_config is not None:
+            for node, node_data in cluster_config.items():
                 name = node_data.get('name', None)
                 zone = node_data.get('zone', None)
                 self.add_node(node, node_name=name, node_zone=zone)

@@ -17,6 +17,8 @@ clients and ease of use.
 Currently targetting for support:
   - Python 2.5 through Python 3.4
 
+[![Build Status](https://travis-ci.org/ewdurbin/clandestiny-python.svg?branch=master)](https://travis-ci.org/ewdurbin/clandestiny-python)
+
 ## example usage
 
 ```python

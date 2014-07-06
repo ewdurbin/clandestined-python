@@ -1,12 +1,12 @@
 
 from collections import defaultdict
 
-from .murmur3 import murmur3_x86_32
+from ._murmur3 import murmur3_32
 
 
 class RendezvousHash(object):
 
-    def __init__(self, nodes=None, hash_function=murmur3_x86_32):
+    def __init__(self, nodes=None, hash_function=murmur3_32):
         self.nodes = []
         if nodes is not None:
             self.nodes = nodes
@@ -27,7 +27,7 @@ class RendezvousHash(object):
 
 class Cluster(object):
 
-    def __init__(self, cluster=None, hash_function=murmur3_x86_32, replicas=2):
+    def __init__(self, cluster=None, hash_function=murmur3_32, replicas=2):
         self.hash_function = hash_function
 
         def RendezvousHashConstructor():

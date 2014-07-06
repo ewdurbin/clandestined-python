@@ -2,7 +2,7 @@
 import unittest
 
 from clandestine import RendezvousHash
-from clandestine.murmur3 import murmur3_x86_32
+from clandestine._murmur3 import murmur3_32
 
 
 class RendezvousHashTestCase(unittest.TestCase):
@@ -10,13 +10,13 @@ class RendezvousHashTestCase(unittest.TestCase):
     def test_init_no_options(self):
         rendezvous = RendezvousHash()
         self.assertEqual(0, len(rendezvous.nodes))
-        self.assertEqual(murmur3_x86_32, rendezvous.hash_function)
+        self.assertEqual(murmur3_32, rendezvous.hash_function)
 
     def test_init(self):
         nodes = ['0', '1', '2']
         rendezvous = RendezvousHash(nodes=nodes)
         self.assertEqual(3, len(rendezvous.nodes))
-        self.assertEqual(murmur3_x86_32, rendezvous.hash_function)
+        self.assertEqual(murmur3_32, rendezvous.hash_function)
 
     def test_add_node(self):
         rendezvous = RendezvousHash()

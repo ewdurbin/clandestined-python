@@ -13,7 +13,7 @@ setup(
     description='rendezvous hashing implementation based on murmur3 hash',
     url='https://github.com/ewdurbin/clandestiny',
     packages=['clandestine'],
-    ext_modules=[Extension('_murmur3', ['ext/_murmur3.c'])],
+    ext_modules=[Extension('clandestine._murmur3', ['ext/_murmur3.c'])],
     scripts=[],
     test_suite='tests',
     install_requires=requirements,

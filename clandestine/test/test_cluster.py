@@ -3,14 +3,14 @@
 import unittest
 
 from clandestine import Cluster
-from clandestine.murmur3 import murmur3_x86_32
+from clandestine._murmur3 import murmur3_32
 
 
 class ClusterTestCase(unittest.TestCase):
 
     def test_init_no_options(self):
         cluster = Cluster()
-        self.assertEqual(murmur3_x86_32, cluster.hash_function)
+        self.assertEqual(murmur3_32, cluster.hash_function)
         self.assertEqual(2, cluster.replicas)
         self.assertEqual({}, cluster.nodes)
         self.assertEqual([], cluster.zones)

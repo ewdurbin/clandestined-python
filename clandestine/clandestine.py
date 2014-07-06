@@ -6,11 +6,18 @@ from ._murmur3 import murmur3_32
 
 class RendezvousHash(object):
 
-    def __init__(self, nodes=None, hash_function=murmur3_32):
+    def __init__(self, nodes=None, hash_function=murmur3_32, murmur_seed=0):
         self.nodes = []
+        self.murmur_seed = murmur_seed
         if nodes is not None:
             self.nodes = nodes
-        self.hash_function = hash_function
+        if hash_function == murmur3_32:
+            self.hash_function = lambda x: hash_function(x, murmur_seed)
+        elif murmur_seed != 0:
+            raise ValueError("Do not know how to set murmur_seed on %s" %
+                             (hash_function.__name__))
+        else:
+            self.hash_function = hash_function
 
     def add_node(self, node):
         if node not in self.nodes:
@@ -27,8 +34,16 @@ class RendezvousHash(object):
 
 class Cluster(object):
 
-    def __init__(self, cluster_config=None, replicas=2, hash_function=murmur3_32):
-        self.hash_function = hash_function
+    def __init__(self, cluster_config=None, replicas=2,
+                 hash_function=murmur3_32, murmur_seed=0):
+        self.murmur_seed = murmur_seed
+        if hash_function == murmur3_32:
+            self.hash_function = lambda x: hash_function(x, murmur_seed)
+        elif murmur_seed != 0:
+            raise ValueError("Do not know how to set murmur_seed on %s" %
+                             (hash_function.__name__))
+        else:
+            self.hash_function = hash_function
 
         def RendezvousHashConstructor():
             return RendezvousHash(nodes=None, hash_function=self.hash_function)

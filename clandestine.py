@@ -59,7 +59,7 @@ class Cluster(object):
             del self.rings[zone]
             del self.zone_members[zone]
 
-    def add_node(self, node_id, node_name=None, node_zone=None):
+    def add_node(self, node_id, node_zone=None, node_name=None):
         if node_id in self.nodes.keys():
             raise ValueError('Node with name %s already exists', node_id)
         self.add_zone(node_zone)

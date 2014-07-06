@@ -17,15 +17,6 @@ clients and ease of use.
 Currently targetting for support:
   - Python 2.5 through Python 3.4
 
-## characteristics
-
-### cluster distribution
-**pretty charts here**
-
-### cluster resizing
-**pretty charts here**
-
-
 ## example usage
 
 ```python

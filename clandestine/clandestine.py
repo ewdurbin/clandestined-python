@@ -6,7 +6,7 @@ from ._murmur3 import murmur3_32
 
 class RendezvousHash(object):
 
-    def __init__(self, nodes=None, hash_function=murmur3_32, murmur_seed=0):
+    def __init__(self, nodes=None, murmur_seed=0, hash_function=murmur3_32):
         self.nodes = []
         self.murmur_seed = murmur_seed
         if nodes is not None:
@@ -35,7 +35,7 @@ class RendezvousHash(object):
 class Cluster(object):
 
     def __init__(self, cluster_config=None, replicas=2,
-                 hash_function=murmur3_32, murmur_seed=0):
+                 murmur_seed=0, hash_function=murmur3_32):
         self.murmur_seed = murmur_seed
         if hash_function == murmur3_32:
             self.hash_function = lambda x: hash_function(x, murmur_seed)

@@ -180,10 +180,10 @@ class ClusterTestCase(unittest.TestCase):
 
         self.assertEqual(['2', '3'], cluster.find_nodes('lol'))
         self.assertEqual(['6', '2'], cluster.find_nodes('wat'))
-        self.assertEqual(['2', '4'], cluster.find_nodes('ok'))
-        self.assertEqual(['6', '1'], cluster.find_nodes('bar'))
+        self.assertEqual(['5', '2'], cluster.find_nodes('ok'))
+        self.assertEqual(['1', '3'], cluster.find_nodes('bar'))
         self.assertEqual(['1', '3'], cluster.find_nodes('foo'))
-        self.assertEqual(['4', '6'], cluster.find_nodes('slap'))
+        self.assertEqual(['2', '4'], cluster.find_nodes('slap'))
 
     def test_find_nodes_by_index(self):
         cluster_config = {
@@ -250,7 +250,7 @@ class ClusterIntegrationTestCase(unittest.TestCase):
             added += len(after.difference(before))
 
         self.assertEqual(added, removed)
-        self.assertEqual(1340, (added + removed))
+        self.assertEqual(1384, (added + removed))
 
     def test_shrink(self):
         cluster_config = {
@@ -302,7 +302,7 @@ class ClusterIntegrationTestCase(unittest.TestCase):
             added += len(after.difference(before))
 
         self.assertEqual(added, removed)
-        self.assertEqual(9892, (added + removed))
+        self.assertEqual(9804, (added + removed))
 
     def test_add_zone(self):
         cluster_config = {

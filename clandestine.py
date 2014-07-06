@@ -80,7 +80,7 @@ class Cluster(object):
     def find_nodes(self, key, offset=None):
         nodes = []
         if offset is None:
-            offset = ord(key[0]) % len(self.zones)
+            offset = sum([ord(char) for char in key]) % len(self.zones)
         for i in range(self.replicas):
             zone = self.zones[(i + offset) % len(self.zones)]
             ring = self.rings[zone]

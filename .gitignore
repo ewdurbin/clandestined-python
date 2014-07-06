@@ -1,5 +1,7 @@
 /.tox
+/.env
 /MANIFEST
+/clandestiny.egg-info
 
 *.pyc
 *.swp

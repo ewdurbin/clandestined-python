@@ -28,7 +28,7 @@ class RendezvousHashTestCase(unittest.TestCase):
     def test_custom_hash_function(self):
         rendezvous = RendezvousHash(hash_function=my_hash_function)
         self.assertEqual(310130709337150341200260887719094037511,
-                         rendezvous.hash_function(b'6666'))
+                         rendezvous.hash_function('6666'.encode('ascii')))
 
     def test_seeded_custom_hash_function(self):
         self.assertRaises(ValueError, RendezvousHash,

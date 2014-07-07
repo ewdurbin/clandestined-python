@@ -93,7 +93,7 @@ static int module_clear(PyObject *m) {
 static struct PyModuleDef moduledef = {
         PyModuleDef_HEAD_INIT,
         "_murmur3",
-        NULL,
+        module_docstring,
         sizeof(struct module_state),
         module_methods,
         NULL,

@@ -1,8 +1,13 @@
 
+import sys
+
 from distutils.core import setup
 from distutils.core import Extension
 
-extra_compile_args = ["-Wno-error=declaration-after-statement"]
+extra_compile_args = []
+
+if sys.version.startswith('3.4'):
+    extra_compile_args.append("-Wno-error=declaration-after-statement")
 
 requirements = []
 test_requirements = []

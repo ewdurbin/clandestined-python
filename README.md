@@ -80,8 +80,10 @@ set to 1
 ### murmur3 seeding
 
 **DISCLAIMER**
+
 clandestined was not designed with consideration for untrusted input, please
 see LICENSE.
+
 **END DISCLAIMER**
 
 if you plan to use keys based on untrusted input (not supported, but go

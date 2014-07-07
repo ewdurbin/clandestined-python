@@ -1,12 +1,8 @@
 
-import hashlib
 import unittest
 
 from clandestined import RendezvousHash
-from clandestined._murmur3 import murmur3_32
 
-def my_hash_function(key):
-    return int(hashlib.md5(key).hexdigest(), 16)
 
 class RendezvousHashTestCase(unittest.TestCase):
 
@@ -21,18 +17,9 @@ class RendezvousHashTestCase(unittest.TestCase):
         self.assertEqual(3, len(rendezvous.nodes))
         self.assertEqual(1361238019, rendezvous.hash_function('6666'))
 
-    def test_murmur_seed(self):
-        rendezvous = RendezvousHash(murmur_seed=10)
+    def test_seed(self):
+        rendezvous = RendezvousHash(seed=10)
         self.assertEqual(2981722772, rendezvous.hash_function('6666'))
-
-    def test_custom_hash_function(self):
-        rendezvous = RendezvousHash(hash_function=my_hash_function)
-        self.assertEqual(310130709337150341200260887719094037511,
-                         rendezvous.hash_function('6666'.encode('ascii')))
-
-    def test_seeded_custom_hash_function(self):
-        self.assertRaises(ValueError, RendezvousHash,
-                          hash_function=my_hash_function, murmur_seed=1)
 
     def test_add_node(self):
         rendezvous = RendezvousHash()
@@ -50,7 +37,7 @@ class RendezvousHashTestCase(unittest.TestCase):
         rendezvous = RendezvousHash(nodes=nodes)
         rendezvous.remove_node('2')
         self.assertEqual(2, len(rendezvous.nodes))
-        rendezvous.remove_node('2')
+        self.assertRaises(ValueError, rendezvous.remove_node, '2')
         self.assertEqual(2, len(rendezvous.nodes))
         rendezvous.remove_node('1')
         self.assertEqual(1, len(rendezvous.nodes))

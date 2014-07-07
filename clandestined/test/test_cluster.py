@@ -1,36 +1,23 @@
 
-import hashlib
 import unittest
 
 from clandestined import Cluster
-from clandestined._murmur3 import murmur3_32
 
-def my_hash_function(key):
-    return int(hashlib.md5(key).hexdigest(), 16)
 
 class ClusterTestCase(unittest.TestCase):
 
     def test_init_no_options(self):
         cluster = Cluster()
-        self.assertEqual(1361238019, cluster.hash_function('6666'))
+        self.assertEqual(0, cluster.seed)
         self.assertEqual(2, cluster.replicas)
         self.assertEqual({}, cluster.nodes)
         self.assertEqual([], cluster.zones)
         self.assertEqual({}, dict(cluster.zone_members))
         self.assertEqual({}, dict(cluster.rings))
 
-    def test_murmur_seed(self):
-        cluster = Cluster(murmur_seed=10)
-        self.assertEqual(2981722772, cluster.hash_function('6666'))
-
-    def test_custom_hash_function(self):
-        cluster = Cluster(hash_function=my_hash_function)
-        self.assertEqual(310130709337150341200260887719094037511,
-                         cluster.hash_function('6666'.encode('ascii')))
-
-    def test_seeded_custom_hash_function(self):
-        self.assertRaises(ValueError, Cluster, hash_function=my_hash_function,
-                          murmur_seed=1)
+    def test_seed(self):
+        cluster = Cluster(seed=10)
+        self.assertEqual(10, cluster.seed)
 
     def test_init_single_zone(self):
         cluster_config = {
@@ -391,6 +378,7 @@ class ClusterIntegrationTestCase(unittest.TestCase):
         cluster.remove_node('6', node_name='node6', node_zone='c')
         cluster.remove_node('11', node_name='node11', node_zone='c')
         cluster.remove_node('12', node_name='node12', node_zone='c')
+        self.assertRaises(ValueError, cluster.remove_node, '12', 'node12', 'c')
 
         new_placements = {}
         for i in cluster.nodes:

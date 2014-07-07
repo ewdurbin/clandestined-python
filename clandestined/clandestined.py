@@ -6,18 +6,12 @@ from ._murmur3 import murmur3_32
 
 class RendezvousHash(object):
 
-    def __init__(self, nodes=None, murmur_seed=0, hash_function=murmur3_32):
+    def __init__(self, nodes=None, seed=0):
         self.nodes = []
-        self.murmur_seed = murmur_seed
+        self.seed = seed
         if nodes is not None:
             self.nodes = nodes
-        if hash_function == murmur3_32:
-            self.hash_function = lambda x: hash_function(x, murmur_seed)
-        elif murmur_seed != 0:
-            raise ValueError("Do not know how to set murmur_seed on %s" %
-                             (hash_function.__name__))
-        else:
-            self.hash_function = hash_function
+        self.hash_function = lambda x: murmur3_32(x, seed)
 
     def add_node(self, node):
         if node not in self.nodes:
@@ -26,6 +20,8 @@ class RendezvousHash(object):
     def remove_node(self, node):
         if node in self.nodes:
             self.nodes.remove(node)
+        else:
+            raise ValueError("No such node %s to remove" % (node))
 
     def find_node(self, key):
         return max(self.nodes, key=lambda x:
@@ -34,19 +30,11 @@ class RendezvousHash(object):
 
 class Cluster(object):
 
-    def __init__(self, cluster_config=None, replicas=2,
-                 murmur_seed=0, hash_function=murmur3_32):
-        self.murmur_seed = murmur_seed
-        if hash_function == murmur3_32:
-            self.hash_function = lambda x: hash_function(x, murmur_seed)
-        elif murmur_seed != 0:
-            raise ValueError("Do not know how to set murmur_seed on %s" %
-                             (hash_function.__name__))
-        else:
-            self.hash_function = hash_function
+    def __init__(self, cluster_config=None, replicas=2, seed=0):
+        self.seed = seed
 
         def RendezvousHashConstructor():
-            return RendezvousHash(nodes=None, hash_function=self.hash_function)
+            return RendezvousHash(nodes=None, seed=self.seed)
 
         self.replicas = replicas
         self.nodes = {}
@@ -73,6 +61,8 @@ class Cluster(object):
             self.zones = sorted(self.zones)
             del self.rings[zone]
             del self.zone_members[zone]
+        else:
+            raise ValueError("No such zone %s to remove" % (zone))
 
     def add_node(self, node_id, node_zone=None, node_name=None):
         if node_id in self.nodes.keys():

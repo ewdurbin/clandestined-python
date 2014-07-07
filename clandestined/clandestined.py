@@ -26,6 +26,8 @@ class RendezvousHash(object):
     def remove_node(self, node):
         if node in self.nodes:
             self.nodes.remove(node)
+        else:
+            raise ValueError("No such node %s to remove" % (node))
 
     def find_node(self, key):
         return max(self.nodes, key=lambda x:
@@ -73,6 +75,8 @@ class Cluster(object):
             self.zones = sorted(self.zones)
             del self.rings[zone]
             del self.zone_members[zone]
+        else:
+            raise ValueError("No such zone %s to remove" % (zone))
 
     def add_node(self, node_id, node_zone=None, node_name=None):
         if node_id in self.nodes.keys():

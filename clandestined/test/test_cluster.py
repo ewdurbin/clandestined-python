@@ -391,6 +391,7 @@ class ClusterIntegrationTestCase(unittest.TestCase):
         cluster.remove_node('6', node_name='node6', node_zone='c')
         cluster.remove_node('11', node_name='node11', node_zone='c')
         cluster.remove_node('12', node_name='node12', node_zone='c')
+        self.assertRaises(ValueError, cluster.remove_node, '12', 'node12', 'c')
 
         new_placements = {}
         for i in cluster.nodes:

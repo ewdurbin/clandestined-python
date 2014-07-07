@@ -50,7 +50,7 @@ class RendezvousHashTestCase(unittest.TestCase):
         rendezvous = RendezvousHash(nodes=nodes)
         rendezvous.remove_node('2')
         self.assertEqual(2, len(rendezvous.nodes))
-        rendezvous.remove_node('2')
+        self.assertRaises(ValueError, rendezvous.remove_node, '2')
         self.assertEqual(2, len(rendezvous.nodes))
         rendezvous.remove_node('1')
         self.assertEqual(1, len(rendezvous.nodes))

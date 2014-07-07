@@ -159,7 +159,7 @@ print cluster.find_nodes('mykey')
 print rendezvous.find_node('mykey')
 ```
 
-outputs
+outputs (note they have changed once more)
 ```
 ['1']
 1

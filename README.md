@@ -22,30 +22,24 @@ Currently targetting for support:
 ## example usage
 
 ```python
-from clandestine import Cluster
-
-nodes = {
-    '1': {'name': 'node1.example.com', 'zone': 'us-east-1a'},
-    '2': {'name': 'node2.example.com', 'zone': 'us-east-1a'},
-    '3': {'name': 'node3.example.com', 'zone': 'us-east-1a'},
-    '4': {'name': 'node4.example.com', 'zone': 'us-east-1b'},
-    '5': {'name': 'node5.example.com', 'zone': 'us-east-1b'},
-    '6': {'name': 'node6.example.com', 'zone': 'us-east-1b'},
-    '7': {'name': 'node7.example.com', 'zone': 'us-east-1c'},
-    '8': {'name': 'node8.example.com', 'zone': 'us-east-1c'},
-    '9': {'name': 'node9.example.com', 'zone': 'us-east-1c'},
-}
-
-cluster = Cluster(nodes)
-nodes = cluster.find_nodes('mykey')
-print nodes[0]
-print nodes[1]
-```
-
-outputs
-```
-4
-8
+>>> from clandestine import Cluster
+>>>
+>>> nodes = {
+...     '1': {'name': 'node1.example.com', 'zone': 'us-east-1a'},
+...     '2': {'name': 'node2.example.com', 'zone': 'us-east-1a'},
+...     '3': {'name': 'node3.example.com', 'zone': 'us-east-1a'},
+...     '4': {'name': 'node4.example.com', 'zone': 'us-east-1b'},
+...     '5': {'name': 'node5.example.com', 'zone': 'us-east-1b'},
+...     '6': {'name': 'node6.example.com', 'zone': 'us-east-1b'},
+...     '7': {'name': 'node7.example.com', 'zone': 'us-east-1c'},
+...     '8': {'name': 'node8.example.com', 'zone': 'us-east-1c'},
+...     '9': {'name': 'node9.example.com', 'zone': 'us-east-1c'},
+... }
+>>>
+>>> cluster = Cluster(nodes)
+>>> cluster.find_nodes('mykey')
+['4', '8']
+>>>
 ```
 
 by default, `Cluster` will place 2 replicas around the cluster taking care to
@@ -56,32 +50,29 @@ invoke the `RendezvousHash` class directly, or use a `Cluster` with replicas
 set to 1
 
 ```python
-from clandestine import Cluster
-from clandestine import RendezvousHash
-
-nodes = {
-    '1': {'name': 'node1.example.com'},
-    '2': {'name': 'node2.example.com'},
-    '3': {'name': 'node3.example.com'},
-    '4': {'name': 'node4.example.com'},
-    '5': {'name': 'node5.example.com'},
-    '6': {'name': 'node6.example.com'},
-    '7': {'name': 'node7.example.com'},
-    '8': {'name': 'node8.example.com'},
-    '9': {'name': 'node9.example.com'},
-}
-
-cluster = Cluster(nodes, replicas=1)
-rendezvous = RendezvousHash(nodes.keys())
-
-print cluster.find_nodes('mykey')
-print rendezvous.find_node('mykey')
-```
-
-outputs
-```
+>>> from clandestine import Cluster
+>>> from clandestine import RendezvousHash
+>>>
+>>> nodes = {
+...     '1': {'name': 'node1.example.com'},
+...     '2': {'name': 'node2.example.com'},
+...     '3': {'name': 'node3.example.com'},
+...     '4': {'name': 'node4.example.com'},
+...     '5': {'name': 'node5.example.com'},
+...     '6': {'name': 'node6.example.com'},
+...     '7': {'name': 'node7.example.com'},
+...     '8': {'name': 'node8.example.com'},
+...     '9': {'name': 'node9.example.com'},
+... }
+>>>
+>>> cluster = Cluster(nodes, replicas=1)
+>>> rendezvous = RendezvousHash(nodes.keys())
+>>>
+>>> cluster.find_nodes('mykey')
 ['4']
-4
+>>> rendezvous.find_node('mykey')
+'4'
+>>>
 ```
 
 ## advanced usage
@@ -94,32 +85,29 @@ technique is by no means a way to fully mitigate a DoS attack using crafted
 keys, it may make you sleep better at night.
 
 ```python
-from clandestine import Cluster
-from clandestine import RendezvousHash
-
-nodes = {
-    '1': {'name': 'node1.example.com'},
-    '2': {'name': 'node2.example.com'},
-    '3': {'name': 'node3.example.com'},
-    '4': {'name': 'node4.example.com'},
-    '5': {'name': 'node5.example.com'},
-    '6': {'name': 'node6.example.com'},
-    '7': {'name': 'node7.example.com'},
-    '8': {'name': 'node8.example.com'},
-    '9': {'name': 'node9.example.com'},
-}
-
-cluster = Cluster(nodes, replicas=1, murmur_seed=1337)
-rendezvous = RendezvousHash(nodes.keys(), murmur_seed=1337)
-
-print cluster.find_nodes('mykey')
-print rendezvous.find_node('mykey')
-```
-
-outputs (note they have changed from above)
-```
+>>> from clandestine import Cluster
+>>> from clandestine import RendezvousHash
+>>>
+>>> nodes = {
+...     '1': {'name': 'node1.example.com'},
+...     '2': {'name': 'node2.example.com'},
+...     '3': {'name': 'node3.example.com'},
+...     '4': {'name': 'node4.example.com'},
+...     '5': {'name': 'node5.example.com'},
+...     '6': {'name': 'node6.example.com'},
+...     '7': {'name': 'node7.example.com'},
+...     '8': {'name': 'node8.example.com'},
+...     '9': {'name': 'node9.example.com'},
+... }
+>>>
+>>> cluster = Cluster(nodes, replicas=1, murmur_seed=1337)
+>>> rendezvous = RendezvousHash(nodes.keys(), murmur_seed=1337)
+>>>
+>>> cluster.find_nodes('mykey')
 ['7']
-7
+>>> rendezvous.find_node('mykey')
+'7'
+>>>
 ```
 
 ### supplying your own hash function
@@ -132,35 +120,32 @@ or `Cluster` object as a callable which takes a byte string `key` and returns
 an integer.
 
 ```python
-import hashlib
-from clandestine import Cluster
-from clandestine import RendezvousHash
-
-nodes = {
-    '1': {'name': 'node1.example.com'},
-    '2': {'name': 'node2.example.com'},
-    '3': {'name': 'node3.example.com'},
-    '4': {'name': 'node4.example.com'},
-    '5': {'name': 'node5.example.com'},
-    '6': {'name': 'node6.example.com'},
-    '7': {'name': 'node7.example.com'},
-    '8': {'name': 'node8.example.com'},
-    '9': {'name': 'node9.example.com'},
-}
-
-def my_hash_function(key):
-    return int(hashlib.sha1(key).hexdigest(), 16)
-
-
-cluster = Cluster(nodes, replicas=1, hash_function=my_hash_function)
-rendezvous = RendezvousHash(nodes.keys(), hash_function=my_hash_function)
-
-print cluster.find_nodes('mykey')
-print rendezvous.find_node('mykey')
-```
-
-outputs (note they have changed once more)
-```
+>>> import hashlib
+>>> from clandestine import Cluster
+>>> from clandestine import RendezvousHash
+>>>
+>>> nodes = {
+...     '1': {'name': 'node1.example.com'},
+...     '2': {'name': 'node2.example.com'},
+...     '3': {'name': 'node3.example.com'},
+...     '4': {'name': 'node4.example.com'},
+...     '5': {'name': 'node5.example.com'},
+...     '6': {'name': 'node6.example.com'},
+...     '7': {'name': 'node7.example.com'},
+...     '8': {'name': 'node8.example.com'},
+...     '9': {'name': 'node9.example.com'},
+... }
+>>>
+>>> def my_hash_function(key):
+...     return int(hashlib.sha1(key.encode('utf-8')).hexdigest(), 16)
+...
+>>>
+>>> cluster = Cluster(nodes, replicas=1, hash_function=my_hash_function)
+>>> rendezvous = RendezvousHash(nodes.keys(), hash_function=my_hash_function)
+>>>
+>>> cluster.find_nodes('mykey')
 ['1']
-1
+>>> rendezvous.find_node('mykey')
+'1'
+>>>
 ```

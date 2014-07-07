@@ -61,10 +61,10 @@ static char module_docstring[] =
 static char murmur3_32_docstring[] =
     "Calculate the murmur3_32 hash for a given string.";
 
-static PyObject *clandestine_murmur3_32(PyObject *self, PyObject *args);
+static PyObject *clandestined_murmur3_32(PyObject *self, PyObject *args);
  
 static PyMethodDef module_methods[] = {
-    {"murmur3_32", clandestine_murmur3_32, METH_VARARGS, murmur3_32_docstring},
+    {"murmur3_32", clandestined_murmur3_32, METH_VARARGS, murmur3_32_docstring},
     {NULL, NULL, 0, NULL}
 };
 
@@ -133,7 +133,7 @@ PyMODINIT_FUNC init_murmur3(void)
 #endif
 }
 
-static PyObject *clandestine_murmur3_32(PyObject *self, PyObject *args)
+static PyObject *clandestined_murmur3_32(PyObject *self, PyObject *args)
 {
     const char *key;
     uint32_t len;

@@ -1,4 +1,4 @@
-clandestiny
+clandestined
 ===========
 
 rendezvous hashing implementation based on murmur3 hash
@@ -11,18 +11,18 @@ cluster of machines. consistent hashing and rendezvous hashing are methods of
 performing this task, while minimizing data movement on cluster topology
 changes.
 
-clandestiny is a library for rendezvous hashing which has the goal of simple
+clandestined is a library for rendezvous hashing which has the goal of simple
 clients and ease of use.
 
 Currently targetting for support:
   - Python 2.5 through Python 3.4
 
-[![Build Status](https://travis-ci.org/ewdurbin/clandestiny-python.svg?branch=master)](https://travis-ci.org/ewdurbin/clandestiny-python)
+[![Build Status](https://travis-ci.org/ewdurbin/clandestined-python.svg?branch=master)](https://travis-ci.org/ewdurbin/clandestined-python)
 
 ## example usage
 
 ```python
->>> from clandestine import Cluster
+>>> from clandestined import Cluster
 >>>
 >>> nodes = {
 ...     '1': {'name': 'node1.example.com', 'zone': 'us-east-1a'},
@@ -50,8 +50,8 @@ invoke the `RendezvousHash` class directly, or use a `Cluster` with replicas
 set to 1
 
 ```python
->>> from clandestine import Cluster
->>> from clandestine import RendezvousHash
+>>> from clandestined import Cluster
+>>> from clandestined import RendezvousHash
 >>>
 >>> nodes = {
 ...     '1': {'name': 'node1.example.com'},
@@ -85,8 +85,8 @@ technique is by no means a way to fully mitigate a DoS attack using crafted
 keys, it may make you sleep better at night.
 
 ```python
->>> from clandestine import Cluster
->>> from clandestine import RendezvousHash
+>>> from clandestined import Cluster
+>>> from clandestined import RendezvousHash
 >>>
 >>> nodes = {
 ...     '1': {'name': 'node1.example.com'},
@@ -121,8 +121,8 @@ an integer.
 
 ```python
 >>> import hashlib
->>> from clandestine import Cluster
->>> from clandestine import RendezvousHash
+>>> from clandestined import Cluster
+>>> from clandestined import RendezvousHash
 >>>
 >>> nodes = {
 ...     '1': {'name': 'node1.example.com'},

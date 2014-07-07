@@ -2,8 +2,8 @@
 import hashlib
 import unittest
 
-from clandestine import RendezvousHash
-from clandestine._murmur3 import murmur3_32
+from clandestined import RendezvousHash
+from clandestined._murmur3 import murmur3_32
 
 def my_hash_function(key):
     return int(hashlib.md5(key).hexdigest(), 16)

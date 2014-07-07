@@ -10,6 +10,7 @@ test_requirements = []
 setup(
     name='clandestined',
     version='1.0.0a',
+    license='MIT',
     author="Ernest W. Durbin III",
     author_email='ewdurbin@gmail.com',
     description='rendezvous hashing implementation based on murmur3 hash',

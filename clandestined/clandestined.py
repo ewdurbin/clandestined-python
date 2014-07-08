@@ -10,16 +10,16 @@ class RendezvousHash(object):
         self.nodes = []
         self.seed = seed
         if nodes is not None:
-            self.nodes = nodes
+            self.nodes = [str(node) for node in nodes]
         self.hash_function = lambda x: _murmur3.murmur3_32(x, seed)
 
     def add_node(self, node):
-        if node not in self.nodes:
-            self.nodes.append(node)
+        if str(node) not in self.nodes:
+            self.nodes.append(str(node))
 
     def remove_node(self, node):
-        if node in self.nodes:
-            self.nodes.remove(node)
+        if str(node) in self.nodes:
+            self.nodes.remove(str(node))
         else:
             raise ValueError("No such node %s to remove" % (node))
 

@@ -1,4 +1,10 @@
 
+v1.0.0rc1 (2014-07-08)
+======================
+
+  - `Rendezvous.find_node` breaks ties in the event of a hash collision. Winner
+    is chosen by `max(str(node_id), str(node_id))`
+
 v1.0.0b (2014-07-07)
 ====================
 

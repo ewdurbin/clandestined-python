@@ -1,7 +1,7 @@
 
 from collections import defaultdict
 
-from ._murmur3 import murmur3_32
+from . import _murmur3
 
 
 class RendezvousHash(object):
@@ -11,7 +11,7 @@ class RendezvousHash(object):
         self.seed = seed
         if nodes is not None:
             self.nodes = nodes
-        self.hash_function = lambda x: murmur3_32(x, seed)
+        self.hash_function = lambda x: _murmur3.murmur3_32(x, seed)
 
     def add_node(self, node):
         if node not in self.nodes:
@@ -24,8 +24,15 @@ class RendezvousHash(object):
             raise ValueError("No such node %s to remove" % (node))
 
     def find_node(self, key):
-        return max(self.nodes, key=lambda x:
-                   self.hash_function("%s-%s" % (str(x), str(key))))
+        high_score = -1
+        winner = None
+        for node in self.nodes:
+            score = self.hash_function("%s-%s" % (str(node), str(key)))
+            if score > high_score:
+                (high_score, winner) = (score, node)
+            elif score == high_score:
+                (high_score, winner) = (score, max(str(node), str(winner)))
+        return winner
 
 
 class Cluster(object):

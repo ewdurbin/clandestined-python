@@ -4,7 +4,7 @@ clandestined
 rendezvous hashing implementation based on murmur3 hash
 
 
-## motiviation
+## motivation
 
 in distributed systems, the need often arises to locate objects amongst a
 cluster of machines. consistent hashing and rendezvous hashing are methods of

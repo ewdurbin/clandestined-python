@@ -1,7 +1,8 @@
 /.tox
 /.env
 /MANIFEST
-/clandestiny.egg-info
+/clandestined.egg-info
+/clandestined/_murmur3.so
 
 *.pyc
 *.swp

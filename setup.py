@@ -14,7 +14,7 @@ test_requirements = []
 
 setup(
     name='clandestined',
-    version='1.0.0b',
+    version='1.0.0rc1',
     license='MIT',
     author="Ernest W. Durbin III",
     author_email='ewdurbin@gmail.com',

@@ -1,5 +1,5 @@
 
-v1.0.0rc1 (2014-07-08)
+v1.0.0rc1 (2014-07-13)
 ======================
 
   - `Rendezvous.find_node` breaks ties in the event of a hash collision. Winner

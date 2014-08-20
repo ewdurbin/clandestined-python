@@ -90,14 +90,14 @@ class Cluster(object):
         return self.nodes.get(node_id, None)
 
     def find_nodes(self, key, offset=None):
-        nodes = []
+        nodes = set()
         if offset is None:
             offset = sum(ord(char) for char in key) % len(self.zones)
         for i in range(self.replicas):
             zone = self.zones[(i + offset) % len(self.zones)]
             ring = self.rings[zone]
-            nodes.append(ring.find_node(key))
-        return nodes
+            nodes.add(ring.find_node(key))
+        return list(nodes)
 
     def find_nodes_by_index(self, partition_id, key_index):
         offset = int(partition_id) + int(key_index) % len(self.zones)

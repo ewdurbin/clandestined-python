@@ -3,6 +3,13 @@
 #include <stdint.h>
 #include <string.h>
 
+#ifdef PYPY_VERSION
+#define COMPILING_IN_PYPY 1
+#define COMPILING_IN_CPYTHON 0
+#else
+#define COMPILING_IN_PYPY 0
+#define COMPILING_IN_CPYTHON 1
+#endif
 // MurmurHash3 was written by Austin Appleby, and is placed in the public
 // domain. The author hereby disclaims copyright to this source code.
 
@@ -72,7 +79,7 @@ struct module_state {
     PyObject *error;
 };
 
-#if PY_MAJOR_VERSION >= 3
+#if COMPILING_IN_CPYTHON && PY_MAJOR_VERSION >= 3
 #define GETSTATE(m) ((struct module_state*)PyModule_GetState(m))
 #else
 #define GETSTATE(m) (&_state)

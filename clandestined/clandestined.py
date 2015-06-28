@@ -1,7 +1,7 @@
 
 from collections import defaultdict
 
-from . import _murmur3
+from . import murmur3
 
 
 class RendezvousHash(object):
@@ -11,7 +11,7 @@ class RendezvousHash(object):
         self.seed = seed
         if nodes is not None:
             self.nodes = nodes
-        self.hash_function = lambda x: _murmur3.murmur3_32(x, seed)
+        self.hash_function = lambda x: murmur3.murmur3_32(x, seed)
 
     def add_node(self, node):
         if node not in self.nodes:

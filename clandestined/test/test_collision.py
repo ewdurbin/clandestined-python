@@ -11,11 +11,11 @@ def mock_murmur3_32(key, seed=0):
 class CollisionTestCase(unittest.TestCase):
 
     def setUp(self):
-        self.original_murmur3_32 = clandestined._murmur3.murmur3_32
-        clandestined._murmur3.murmur3_32 = mock_murmur3_32
+        self.original_murmur3_32 = clandestined.murmur3.murmur3_32
+        clandestined.murmur3.murmur3_32 = mock_murmur3_32
 
     def tearDown(self):
-        clandestined._murmur3.murmur3_32 = self.original_murmur3_32
+        clandestined.murmur3.murmur3_32 = self.original_murmur3_32
 
     def test_monkey_patch(self):
         rendezvous = RendezvousHash()

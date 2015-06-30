@@ -1,3 +1,9 @@
+v1.0.1 (2015-06-30)
+===================
+
+  - PyPy3 support in `_murmur3` extension - @sontek
+  - Pure Python fallback `murmur3_32` function for non-CPython interpreters.
+
 v1.0.0 (2014-12-18)
 ===================
 

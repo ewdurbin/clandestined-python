@@ -14,8 +14,9 @@ changes.
 clandestined is a library for rendezvous hashing which has the goal of simple
 clients and ease of use.
 
-Currently targetting for support:
-  - Python 2.5 through Python 3.4
+Currently Supported Interpreters:
+  - Python 2.5 through Python 3.5
+  - PyPy and PyPy3
 
 [![Build Status](https://travis-ci.org/ewdurbin/clandestined-python.svg?branch=master)](https://travis-ci.org/ewdurbin/clandestined-python)
 

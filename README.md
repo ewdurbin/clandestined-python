@@ -117,3 +117,10 @@ keys, it may make you sleep better at night.
 '7'
 >>>
 ```
+
+## contributors
+
+Thanks to the following contributors for their aid in making this project great:
+
+- [John Anderson](https://github.com/sontek)
+- [Chris O'Hara](https://github.com/chriso)

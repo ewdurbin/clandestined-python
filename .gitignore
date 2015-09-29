@@ -6,3 +6,5 @@
 
 *.pyc
 *.swp
+
+*$py.class

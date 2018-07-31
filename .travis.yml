@@ -1,16 +1,16 @@
+sudo: false
 language: python
-python: 2.7
-env:
-  matrix:
-    - TOXENV=py26
-    - TOXENV=py27
-    - TOXENV=py32
-    - TOXENV=py33
-    - TOXENV=py34
-    - TOXENV=py35
-    - TOXENV=py36
-    - TOXENV=py37
-    - TOXENV=pypy
-    - TOXENV=pypy3
-install: pip install tox
+python:
+  - "2.6"
+  - "2.7"
+  - "3.2"
+  - "3.3"
+  - "3.4"
+  - "3.5"
+  - "3.6"
+  - "3.7"
+  - "3.8-dev"
+  - "pypy"
+  - "pypy3"
+install: pip install tox-travis
 script: tox

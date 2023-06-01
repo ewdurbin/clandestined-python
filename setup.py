@@ -14,9 +14,9 @@ test_requirements = []
 
 setup(
     name='clandestined',
-    version='1.0.1',
+    version='1.1.0',
     license='MIT',
-    author="Ernest W. Durbin III",
+    author="Ee Durbin",
     author_email='ewdurbin@gmail.com',
     description='rendezvous hashing implementation based on murmur3 hash',
     url='https://github.com/ewdurbin/clandestined-python',

@@ -1,3 +1,4 @@
+#define PY_SSIZE_T_CLEAN
 #include <Python.h>
 
 #include <stdint.h>
@@ -13,7 +14,7 @@
 // MurmurHash3 was written by Austin Appleby, and is placed in the public
 // domain. The author hereby disclaims copyright to this source code.
 
-uint32_t murmur3_32(const char *key, uint32_t len, uint32_t seed) {
+uint32_t murmur3_32(const char *key, Py_ssize_t len, uint32_t seed) {
     static const uint32_t c1 = 0xcc9e2d51;
     static const uint32_t c2 = 0x1b873593;
     static const uint32_t r1 = 15;
@@ -143,7 +144,7 @@ PyMODINIT_FUNC init_murmur3(void)
 static PyObject *clandestined_murmur3_32(PyObject *self, PyObject *args)
 {
     const char *key;
-    uint32_t len;
+    Py_ssize_t len;
     uint32_t seed = 0;
 
     if (!PyArg_ParseTuple(args, "s#|i", &key, &len, &seed)) {
